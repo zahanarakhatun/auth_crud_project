@@ -1,30 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Auth & CRUD App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django App{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">MyApp</a>
-        <div class="navbar-nav ms-auto">
-          {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'home' %}">Home Page</a>
-            <a class="nav-link" href="{% url 'product_list' %}">Product List</a>
-            <a class="nav-link" href="{% url 'add_product' %}">Add Product</a>
-            <a class="nav-link text-danger" href="{% url 'logout' %}">Logout</a>
-          {% else %}
-            <a class="nav-link" href="{% url 'signup' %}">Signup</a>
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-          {% endif %}
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <!-- Brand Logo / Name -->
+            <a class="navbar-brand fw-bold text-warning" href="{% url 'home' %}">
+                <i class="fa-solid fa-code me-2"></i>My App
+            </a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Nav Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product_list' %}">Products</a>
+                    </li>
+
+                </ul>
+
+                <!-- Right Side User Menu -->
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'profile' %}">
+                            <i class="fa-solid fa-user me-1"></i>Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- আপনার প্রজেক্টে যদি logout URL এর নাম ভিন্ন হয় তবে তা এখানে বসিয়ে দেবেন -->
+                        <a class="nav-link text-danger" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-warning btn-sm text-dark ms-2" href="{% url 'signup' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
-    <div class="container mt-4">
-        {% block content %}{% endblock %}
-    </div>
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="container flex-grow-1 my-4">
+        {% block content %}
+        <!-- অন্যান্য পেজের কন্টেন্ট এখানে লোড হবে -->
+        {% endblock %}
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-dark text-white pt-4 pb-3 mt-auto border-top border-secondary">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                <!-- Column 1: About -->
+                <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold text-warning mb-3">
+                        <i class="fa-solid fa-laptop-code me-2"></i>My Project
+                    </h6>
+                    <p class="text-muted style-small">
+                        A Django web application providing dynamic templates, user management, and seamless navigation.
+                    </p>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold text-warning mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'home' %}" class="text-white-50 text-decoration-none">Home</a>
+                        </li>
+                        <li class="mb-2"><a href="{% url 'product_list' %}"
+                                class="text-white-50 text-decoration-none">Products</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact Info -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold text-warning mb-3">Contact</h6>
+                    <p class="text-white-50 mb-1"><i class="fas fa-home me-2"></i> Dhaka, Bangladesh</p>
+                    <p class="text-white-50 mb-1"><i class="fas fa-envelope me-2"></i> zahanarahaquejes@gmail.com</p>
+                </div>
+            </div>
+
+            <hr class="my-3 bg-secondary">
+
+            <!-- Copyright -->
+            <div class="text-center text-white-50">
+                <small>&copy; {% now "Y" %} Zahanara Khatun. All Rights Reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -41,6 +41,13 @@ def logout_view(request):
 @login_required
 def home_view(request):
     return render(request, 'home.html')
+#5.about page view
+def about(request):
+    return render(request,'about.html')
+# 6.profile page view
+@login_required
+def profile(request):
+    return render(request,'profile.html')
 
 # 5. Product List (Card view)
 def product_list(request):

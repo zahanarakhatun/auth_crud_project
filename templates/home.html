@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card col-md-6 mx-auto mt-4 p-3 text-center">
+<div class="card col-md-6 mx-auto mt-5 p-3 text-center bg-danger text-white">
     <h2>User Profile</h2>
+    
     {% if user.profile_image %}
-        <img src="{{ user.profile_image.url }}" class="rounded-circle mx-auto my-3" style="width:150px; height:150px; object-fit:cover;">
+    <img src="{{ user.profile_image.url }}" class="rounded-circle mx-auto my-3"
+        style="width:150px; height:150px; object-fit:cover;">
     {% endif %}
-    <h4><strong>Full Name:</strong> {{ user.full_name }}</h4>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>User Type:</strong> {{ user.user_types }}</p>
-    <p><strong>Date of Birth:</strong> {{ user.date_of_birth }}</p>
+
+    <h4><strong>Full Name:ZAHANARA KHATUN</strong> {{ user.get_full_name|default:""}}</h4>
+    <p><strong>Email:ZAHANARAHAQUEJES@GMAIL.COM</strong> {{ user.email }}</p>
+    <p><strong>User Type:</strong> {{ user.user_types|default:"" }}</p>
+    <p><strong>Date of Birth:08/10/1988</strong> {{ user.date_of_birth|default:"" }}</p>
 </div>
 {% endblock %}

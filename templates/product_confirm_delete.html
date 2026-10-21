@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Confirmation</title>
+    <!-- Bootstrap CDN Link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+    <h3>Are you sure you want to delete "{{ object }}"?</h3>
+    
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        
+        <!-- Red Danger Button -->
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        
+        <!-- Secondary Cancel Button -->
+        <a href="{% url 'product_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+
+</body>
+</html>
